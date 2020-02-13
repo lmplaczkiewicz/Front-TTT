@@ -22,23 +22,13 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   }
   console.log(ringDiceTiles)
   for (let i = 0; i < skillDiceResults.length; i++) {
-    if (skillDiceResults[i] === 1) {
+    if (skillDiceResults[i] === 1 || skillDiceResults[i] === 2) {
       skillDiceTiles.push('./assets/images/white.png')
-    } else if (skillDiceResults[i] === 2) {
-      skillDiceTiles.push('./assets/images/white.png')
-    } else if (skillDiceResults[i] === 3) {
+    } else if (skillDiceResults[i] === 3 || skillDiceResults[i] === 4 || skillDiceResults[i] === 5) {
       skillDiceTiles.push('./assets/images/whiteo.png')
-    } else if (skillDiceResults[i] === 4) {
-      skillDiceTiles.push('./assets/images/whiteo.png')
-    } else if (skillDiceResults[i] === 5) {
-      skillDiceTiles.push('./assets/images/whiteo.png')
-    } else if (skillDiceResults[i] === 6) {
+    } else if (skillDiceResults[i] === 6 | skillDiceResults[i] === 7) {
       skillDiceTiles.push('./assets/images/whitest.png')
-    } else if (skillDiceResults[i] === 7) {
-      skillDiceTiles.push('./assets/images/whitest.png')
-    } else if (skillDiceResults[i] === 8) {
-      skillDiceTiles.push('./assets/images/whites.png')
-    } else if (skillDiceResults[i] === 9) {
+    } else if (skillDiceResults[i] === 8 | skillDiceResults[i] === 9) {
       skillDiceTiles.push('./assets/images/whites.png')
     } else if (skillDiceResults[i] === 10) {
       skillDiceTiles.push('./assets/images/whiteso.png')

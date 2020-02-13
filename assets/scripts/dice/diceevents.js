@@ -43,8 +43,14 @@ const rollDice = function () {
   ui.showDiceSuccess(ringDiceResults, skillDiceResults)
 }
 
+const clearInput = function () {
+  document.getElementById('clearRDiceButton').value = ''
+  document.getElementById('clearSDiceButton').value = ''
+}
+
 const addHandlers = function () {
   $('.rollDice').on('click', rollDice)
+  $('.clearButton').on('click', clearInput)
   // $('#rollDice').on('click', function () {
   //  console.log('TEST')
   // })
