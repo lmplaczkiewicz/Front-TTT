@@ -26,9 +26,9 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
       skillDiceTiles.push('./assets/images/white.png')
     } else if (skillDiceResults[i] === 3 || skillDiceResults[i] === 4 || skillDiceResults[i] === 5) {
       skillDiceTiles.push('./assets/images/whiteo.png')
-    } else if (skillDiceResults[i] === 6 | skillDiceResults[i] === 7) {
+    } else if (skillDiceResults[i] === 6 || skillDiceResults[i] === 7) {
       skillDiceTiles.push('./assets/images/whitest.png')
-    } else if (skillDiceResults[i] === 8 | skillDiceResults[i] === 9) {
+    } else if (skillDiceResults[i] === 8 || skillDiceResults[i] === 9) {
       skillDiceTiles.push('./assets/images/whites.png')
     } else if (skillDiceResults[i] === 10) {
       skillDiceTiles.push('./assets/images/whiteso.png')
@@ -39,10 +39,14 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
     }
   }
   console.log(skillDiceTiles)
+  var today = new Date();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})// quests: data.quests })
   $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
+  $('#diceTime').text(time)
   const showSkillDiceHtml = showDiceTemplate({dice: skillDiceTiles})// quests: data.quests })
   $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
+  $('#diceTime').text(time)
 }
 
 module.exports = {

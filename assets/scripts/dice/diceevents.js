@@ -13,6 +13,17 @@ const dice = [
   }
 ]
 
+const keepDice = function (event) {
+  event.preventDefault()
+  const dice = event.target
+  console.log('dice is ' + dice)
+  if (dice.classList.contains('kept')) {
+    dice.classList.remove('kept')
+  } else {
+    dice.classList.add('kept')
+  }
+}
+
 const roll = function (sides) {
   console.log(sides)
   const randomNumber = Math.floor(Math.random() * sides) + 1
@@ -41,6 +52,7 @@ const rollDice = function () {
   console.log(ringDiceResults)
   console.log(skillDiceResults)
   ui.showDiceSuccess(ringDiceResults, skillDiceResults)
+  $('.keepDice').on('click', keepDice)
 }
 
 const clearInput = function () {

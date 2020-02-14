@@ -1,9 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
 
 .diceImage {
-  height: 50px;
+  border: 5px;
+  height: 45px;
   margin: 5px;
-  width: 50px;
+  width: 45px;
 }
 
 .sectionBox {
@@ -14,4 +15,14 @@
   margin: 25px;
   overflow: scroll;
   text-align: center;
+}
+
+.diceTime {
+  display: inline-block;
+}
+
+.kept {
+  border: 1px solid black;
+  outline-style: solid;
+  outline-color: red;
 }
