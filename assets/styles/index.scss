@@ -1,1 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
+
+.diceImage {
+  height: 50px;
+  margin: 5px;
+  width: 50px;
+}
+
+.sectionBox {
+  background: #808080;
+  border-radius: 25px;
+  height: 400px;
+  width: 33%;
+  margin: 25px;
+  overflow: scroll;
+}

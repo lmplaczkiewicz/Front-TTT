@@ -13,17 +13,27 @@
     </head>
     <body>
       <h1>Legend of The Five Rings Dice</h1>
-      <div>
-        <h3>Ring Dice</h3>
-        <input type="number" maxlength="1" name="rDice" id='rDice' />
-        <button class="clearButton btn" id='clearRDiceButton'>x</button>
-        <h3>Skill Dice</h3>
-        <input type="number" maxlength="1" name="sDice" id='sDice' />
-        <button class="clearButton btn" id='clearSDiceButton'>x</button>
-        <div>
-          <button class="rollDice btn btn-warning" id='rollDice'>Roll Dice</button>
-        </div>
-        <div id='diceTileDisplay'>
+      <div class="container">
+        <div class="row">
+          <div class="col sectionBox" id='rollBox'>
+            <h3>Ring Dice</h3>
+            <input type="number" maxlength="1" name="rDice" id='rDice' />
+            <button class="clearButton btn" id='clearRDiceButton'>x</button>
+            <h3>Skill Dice</h3>
+            <input type="number" maxlength="1" name="sDice" id='sDice' />
+            <button class="clearButton btn" id='clearSDiceButton'>x</button>
+            <div>
+              <button class="rollDice btn btn-warning" id='rollDice'>Roll Dice</button>
+            </div>
+          </div>
+          <div class="col sectionBox" id='ringBox'>
+            <div id='ringDiceTileDisplay'>
+            </div>
+          </div>
+          <div class="col sectionBox" id='skillBox'>
+            <div id='skillDiceTileDisplay'>
+            </div>
+          </div>
         </div>
       </div>
     </body>

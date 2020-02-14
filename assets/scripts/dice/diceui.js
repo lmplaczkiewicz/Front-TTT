@@ -40,9 +40,9 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   }
   console.log(skillDiceTiles)
   const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})// quests: data.quests })
-  $('#diceTileDisplay').append(showRingDiceHtml)
+  $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
   const showSkillDiceHtml = showDiceTemplate({dice: skillDiceTiles})// quests: data.quests })
-  $('#diceTileDisplay').append(showSkillDiceHtml)
+  $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
 }
 
 module.exports = {
