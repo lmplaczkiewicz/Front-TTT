@@ -34,6 +34,7 @@ const roll = function (sides) {
 
 const rollDice = function () {
   console.log('Test')
+  ui.hideRDiceExplosionElement()
   const ringDiceRoll = document.getElementById('rDice').value
   const skillDiceRoll = document.getElementById('sDice').value
   const ringDiceResults = []
@@ -60,6 +61,7 @@ const rollDice = function () {
 
 const clearDice = function () {
   console.log('clear hit')
+  ui.hideRDiceExplosionElement()
   ui.ringDiceTiles = []
   ui.skillDiceTiles = []
   const ringDiceDisplay = document.getElementById('ringDiceTileDisplay')
@@ -81,6 +83,7 @@ const addHandlers = function () {
   $('.clearDice').on('click', clearDice)
   $('.clearRDiceInputButton').on('click', clearRDiceInput)
   $('.clearSDiceInputButton').on('click', clearSDiceInput)
+  $('#ringDiceExplosion').on('click', ui.hideRDiceExplosionElement)
   // $('#rollDice').on('click', function () {
   //  console.log('TEST')
   // })

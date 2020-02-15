@@ -4,16 +4,22 @@ const showSkillDiceTemplate = require('../templates/skillDiceTiles.handlebars')
 const moment = require('moment');
 let ringDiceTiles = []
 let skillDiceTiles = []
+let ringDiceExplosionCount = 0
+let skillDiceExplosionCount = 0
+let rDiceExplosionElement = document.getElementById('ringDiceExplosion')
 
 const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   ringDiceTiles = []
   skillDiceTiles = []
+  let ringDiceExplosionCount = 0
+  let skillDiceExplosionCount = 0
   for (let i = 0; i < ringDiceResults.length; i++) {
     console.log('In ring dice')
     if (ringDiceResults[i] === 1) {
       ringDiceTiles.push('./assets/images/black.png')
     } else if (ringDiceResults[i] === 2) {
       ringDiceTiles.push('./assets/images/blacket.png')
+      ringDiceExplosionCount++
     } else if (ringDiceResults[i] === 3) {
       ringDiceTiles.push('./assets/images/blacko.png')
     } else if (ringDiceResults[i] === 4) {
@@ -38,8 +44,10 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
       skillDiceTiles.push('./assets/images/whiteso.png')
     } else if (skillDiceResults[i] === 11) {
       skillDiceTiles.push('./assets/images/whiteet.png')
+      skillDiceExplosionCount++
     } else if (skillDiceResults[i] === 12) {
       skillDiceTiles.push('./assets/images/whitee.png')
+      skillDiceExplosionCount++
     }
   }
   console.log(skillDiceTiles)
@@ -48,6 +56,10 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   if(ringDiceTiles.length > 0){
     $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
     $('#diceTime').text(time)
+    if(ringDiceExplosionCount > 0){
+      console.log('explosion rdice exist');
+      showRDiceExplosionElement()
+    }
   }
   const showSkillDiceHtml = showSkillDiceTemplate({dice: skillDiceTiles})
   if(skillDiceTiles.length > 0){
@@ -56,6 +68,15 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   }
 }
 
+const showRDiceExplosionElement = function () {
+    rDiceExplosionElement.style.display = 'block'
+}
+
+const hideRDiceExplosionElement = function () {
+    rDiceExplosionElement.style.display = 'none'
+}
+
 module.exports = {
-  showDiceSuccess
+  showDiceSuccess,
+  hideRDiceExplosionElement
 }
