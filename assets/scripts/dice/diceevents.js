@@ -17,7 +17,9 @@ const keepDice = function (event) {
   event.preventDefault()
   const dice = event.target
   console.log('dice is ' + dice)
+  console.log(dice.classList)
   if (dice.classList.contains('kept')) {
+    console.log('in kept present condition')
     dice.classList.remove('kept')
   } else {
     dice.classList.add('kept')
@@ -52,6 +54,7 @@ const rollDice = function () {
   console.log(ringDiceResults)
   console.log(skillDiceResults)
   ui.showDiceSuccess(ringDiceResults, skillDiceResults)
+  $('.keepDice').off('click', keepDice)
   $('.keepDice').on('click', keepDice)
 }
 

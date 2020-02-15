@@ -1,5 +1,7 @@
 // const store = require('../store')
 const showDiceTemplate = require('../templates/diceTiles.handlebars')
+const showSkillDiceTemplate = require('../templates/skillDiceTiles.handlebars')
+const moment = require('moment');
 
 const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   const ringDiceTiles = []
@@ -39,14 +41,13 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
     }
   }
   console.log(skillDiceTiles)
-  var today = new Date();
-  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const time = moment().format('LTS');
   const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})// quests: data.quests })
   $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
   $('#diceTime').text(time)
-  const showSkillDiceHtml = showDiceTemplate({dice: skillDiceTiles})// quests: data.quests })
+  const showSkillDiceHtml = showSkillDiceTemplate({dice: skillDiceTiles})// quests: data.quests })
   $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
-  $('#diceTime').text(time)
+  $('#diceTimeSkill').text(time)
 }
 
 module.exports = {
