@@ -35,19 +35,17 @@ const roll = function (sides) {
 const rollDice = function () {
   console.log('Test')
   ui.hideRDiceExplosionElement()
-  const ringDiceRoll = document.getElementById('rDice').value
-  const skillDiceRoll = document.getElementById('sDice').value
   const ringDiceResults = []
   const skillDiceResults = []
   for (let i = 0; i < dice.length; i++) {
     if (dice[i].name === 'Ring') {
       console.log(dice[i].name)
       console.log(dice[i].sides)
-      for (let x = 0; x < ringDiceRoll; x++) {
+      for (let x = 0; x < ui.ringDiceNumberToRoll; x++) {
         ringDiceResults.push(roll(dice[i].sides))
       }
     } else if (dice[i].name === 'Skill') {
-      for (let x = 0; x < skillDiceRoll; x++) {
+      for (let x = 0; x < ui.skillDiceNumberToRoll; x++) {
         skillDiceResults.push(roll(dice[i].sides))
       }
     }
@@ -57,6 +55,18 @@ const rollDice = function () {
   ui.showDiceSuccess(ringDiceResults, skillDiceResults)
   $('.keepDice').off('click', keepDice)
   $('.keepDice').on('click', keepDice)
+}
+
+const getDiceInputs = function () {
+  ui.ringDiceNumberToRoll = 0
+  ui.skillDiceNumberToRoll = 0
+  ui.ringDiceNumberToRoll = document.getElementById('rDice').value
+  ui.skillDiceNumberToRoll = document.getElementById('sDice').value
+}
+
+const getRDiceExplosionInput = function () {
+  ui.ringDiceNumberToRoll = 0
+  ui.ringDiceNumberToRoll = document.getElementById('ringDiceExplosionInput').value
 }
 
 const clearDice = function () {
@@ -79,13 +89,17 @@ const clearSDiceInput = function () {
 }
 
 const addHandlers = function () {
-  $('.rollDice').on('click', rollDice)
+  $('.rollDice').on('click', function () {
+    getDiceInputs()
+    rollDice()
+  })
   $('.clearDice').on('click', clearDice)
   $('.clearRDiceInputButton').on('click', clearRDiceInput)
   $('.clearSDiceInputButton').on('click', clearSDiceInput)
-  $('#ringDiceExplosion').on('click', ui.hideRDiceExplosionElement)
-  // $('#rollDice').on('click', function () {
-  //  console.log('TEST')
+  // $('#ringDiceExplosion').on('click', function () {
+  //  ui.hideRDiceExplosionElement()
+  //  getRDiceExplosionInput()
+  //  rollDice()
   // })
 }
 

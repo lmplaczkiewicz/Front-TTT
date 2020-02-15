@@ -2,6 +2,8 @@
 const showDiceTemplate = require('../templates/diceTiles.handlebars')
 const showSkillDiceTemplate = require('../templates/skillDiceTiles.handlebars')
 const moment = require('moment');
+let ringDiceNumberToRoll
+let skillDiceNumberToRoll
 let ringDiceTiles = []
 let skillDiceTiles = []
 let ringDiceExplosionCount = 0
@@ -69,7 +71,7 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
 }
 
 const showRDiceExplosionElement = function () {
-    rDiceExplosionElement.style.display = 'block'
+    // rDiceExplosionElement.style.display = 'block'
 }
 
 const hideRDiceExplosionElement = function () {
