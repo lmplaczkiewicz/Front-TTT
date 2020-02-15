@@ -58,14 +58,29 @@ const rollDice = function () {
   $('.keepDice').on('click', keepDice)
 }
 
-const clearInput = function () {
-  document.getElementById('clearRDiceButton').value = ''
-  document.getElementById('clearSDiceButton').value = ''
+const clearDice = function () {
+  console.log('clear hit')
+  ui.ringDiceTiles = []
+  ui.skillDiceTiles = []
+  const ringDiceDisplay = document.getElementById('ringDiceTileDisplay')
+  const skillDiceDisplay = document.getElementById('skillDiceTileDisplay')
+  ringDiceDisplay.innerHTML = ''
+  skillDiceDisplay.innerHTML = ''
+}
+
+const clearRDiceInput = function () {
+  document.getElementById('rDice').value = ''
+}
+
+const clearSDiceInput = function () {
+  document.getElementById('sDice').value = ''
 }
 
 const addHandlers = function () {
   $('.rollDice').on('click', rollDice)
-  $('.clearButton').on('click', clearInput)
+  $('.clearDice').on('click', clearDice)
+  $('.clearRDiceInputButton').on('click', clearRDiceInput)
+  $('.clearSDiceInputButton').on('click', clearSDiceInput)
   // $('#rollDice').on('click', function () {
   //  console.log('TEST')
   // })

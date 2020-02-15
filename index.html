@@ -13,17 +13,20 @@
     </head>
     <body>
       <img src='assets/images/paper.png' class='openingImage' alt="">
-      <h1>Legend of The Five Rings Dice</h1>
+      <h1 class="pageFont text-center mt-sm-4">Legend of The Five Rings Dice</h1>
         <div class="row">
           <div class="col sectionBox" id='rollBox'>
-            <h3>Ring Dice</h3>
-            <input type="number" maxlength="1" name="rDice" id='rDice' />
-            <button class="clearButton btn" id='clearRDiceButton'>x</button>
-            <h3>Skill Dice</h3>
+            <div class="mt-sm-2 mb-sm-4">
+              <h3 class="pageFont">Ring Dice</h3>
+              <input type="number" maxlength="1" name="rDice" id='rDice' />
+              <button class="clearRDiceInputButton btn-xs">x</button>
+            </div>
+            <h3 class="pageFont">Skill Dice</h3>
             <input type="number" maxlength="1" name="sDice" id='sDice' />
-            <button class="clearButton btn" id='clearSDiceButton'>x</button>
+            <button class="clearSDiceInputButton btn-xs">x</button>
             <div>
-              <button class="rollDice btn btn-warning" id='rollDice'>Roll Dice</button>
+              <button class="rollDice btn btn-success mt-sm-4 mr-sm-3" id='rollDice'>Roll Dice</button>
+              <button class="clearDice btn btn-warning mt-sm-4" id='clearDice'>Clear Dice</button>
             </div>
           </div>
           <div class="col sectionBox" id='ringBox'>

@@ -2,10 +2,12 @@
 const showDiceTemplate = require('../templates/diceTiles.handlebars')
 const showSkillDiceTemplate = require('../templates/skillDiceTiles.handlebars')
 const moment = require('moment');
+let ringDiceTiles = []
+let skillDiceTiles = []
 
 const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
-  const ringDiceTiles = []
-  const skillDiceTiles = []
+  ringDiceTiles = []
+  skillDiceTiles = []
   for (let i = 0; i < ringDiceResults.length; i++) {
     console.log('In ring dice')
     if (ringDiceResults[i] === 1) {
@@ -42,12 +44,16 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   }
   console.log(skillDiceTiles)
   const time = moment().format('LTS');
-  const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})// quests: data.quests })
-  $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
-  $('#diceTime').text(time)
-  const showSkillDiceHtml = showSkillDiceTemplate({dice: skillDiceTiles})// quests: data.quests })
-  $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
-  $('#diceTimeSkill').text(time)
+  const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})
+  if(ringDiceTiles.length > 0){
+    $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
+    $('#diceTime').text(time)
+  }
+  const showSkillDiceHtml = showSkillDiceTemplate({dice: skillDiceTiles})
+  if(skillDiceTiles.length > 0){
+    $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
+    $('#diceTimeSkill').text(time)
+  }
 }
 
 module.exports = {
