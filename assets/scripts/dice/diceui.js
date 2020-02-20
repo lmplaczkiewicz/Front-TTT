@@ -70,6 +70,45 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   }
 }
 
+const reRollImages = function (number, diceType) {
+  let source
+  if (diceType === 'Skill') {
+    if (number === 1 || number === 2) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/white.png'
+    } else if (number === 3 || number === 4 || number === 5) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/whiteo.png'
+    } else if (number === 6 || number === 7) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/whitest.png'
+    } else if (number === 8 || number === 9) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/whites.png'
+    } else if (number === 10) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/whiteso.png'
+    } else if (number === 11) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/whiteet.png'
+      skillDiceExplosionCount++
+    } else if (number === 12) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/whitee.png'
+      skillDiceExplosionCount++
+    }
+  } else {
+    if (number === 1) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/black.png'
+    } else if (number === 2) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacket.png'
+      ringDiceExplosionCount++
+    } else if (number === 3) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacko.png'
+    } else if (number === 4) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blackot.png'
+    } else if (number === 5) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blackst.png'
+    } else if (number === 6) {
+      source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacks.png'
+    }
+  }
+  return source
+}
+
 const showRDiceExplosionElement = function () {
   // rDiceExplosionElement.style.display = 'block'
 }
@@ -80,5 +119,6 @@ const hideRDiceExplosionElement = function () {
 
 module.exports = {
   showDiceSuccess,
+  reRollImages,
   hideRDiceExplosionElement
 }

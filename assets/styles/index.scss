@@ -45,9 +45,12 @@ body {
 }
 
 .kept {
-  border: 1px solid black;
   outline-style: solid;
   outline-color: red;
+}
+
+.reroll {
+  border: 2px solid yellow;
 }
 
 .pageFont {
