@@ -1,5 +1,6 @@
 // const store = require('../store')
 const showDiceTemplate = require('../templates/diceTiles.handlebars')
+const showDiceExplosionTemplate = require('../templates/ringDiceExplosionTileDisplay.handlebars')
 const showSkillDiceTemplate = require('../templates/skillDiceTiles.handlebars')
 const moment = require('moment')
 let ringDiceNumberToRoll
@@ -8,7 +9,8 @@ let ringDiceTiles = []
 let skillDiceTiles = []
 let ringDiceExplosionCount = 0
 let skillDiceExplosionCount = 0
-let rDiceExplosionElement = document.getElementById('ringDiceExplosion')
+let rDiceExplosionElement = document.getElementById('ringDiceExplosionWrapper')
+let sDiceExplosionElement = document.getElementById('skillDiceExplosionWrapper')
 
 const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   ringDiceTiles = []
@@ -59,6 +61,7 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
     $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
     $('#diceTime').text(time)
     if (ringDiceExplosionCount > 0) {
+      $('#ringDiceExplosionInput').val(ringDiceExplosionCount)
       console.log('explosion rdice exist')
       showRDiceExplosionElement()
     }
@@ -67,7 +70,38 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   if (skillDiceTiles.length > 0) {
     $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
     $('#diceTimeSkill').text(time)
+    if (skillDiceExplosionCount > 0) {
+      $('#skillDiceExplosionInput').val(skillDiceExplosionCount)
+      console.log('explosion sdice exist')
+      showSDiceExplosionElement()
+    }
   }
+}
+
+const showRingExplosion = function (ringDiceResults) {
+  let explosionDiceTiles = []
+  skillDiceTiles = []
+  let ringDiceExplosionCount = 0
+  for (let i = 0; i < ringDiceResults.length; i++) {
+    console.log('In ring dice')
+    if (ringDiceResults[i] === 1) {
+      explosionDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/black.png')
+    } else if (ringDiceResults[i] === 2) {
+      explosionDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacket.png')
+      ringDiceExplosionCount++
+    } else if (ringDiceResults[i] === 3) {
+      explosionDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacko.png')
+    } else if (ringDiceResults[i] === 4) {
+      explosionDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blackot.png')
+    } else if (ringDiceResults[i] === 5) {
+      explosionDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blackst.png')
+    } else if (ringDiceResults[i] === 6) {
+      explosionDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacks.png')
+    }
+  }
+  const showRingDiceHtml = showDiceExplosionTemplate({dice: explosionDiceTiles})
+  $('#ringDiceExplosionTileDisplay').append(showRingDiceHtml)
+  checkExplosion()
 }
 
 const reRollImages = function (number, diceType) {
@@ -109,16 +143,38 @@ const reRollImages = function (number, diceType) {
   return source
 }
 
+const checkExplosion = function () {
+  console.log('checkexplosion')
+  const images = $('#ringDiceStack').html()
+  console.log(images)
+  const count = (images.match(/blacket/g) || []).length
+  const rerolls = (images.match(/reroll/g) || []).length
+  const explosions = (images.match(/explosions/g) || []).length
+  console.log(count)
+  if (count )
+}
+
 const showRDiceExplosionElement = function () {
-  // rDiceExplosionElement.style.display = 'block'
+  rDiceExplosionElement.style.display = 'block'
 }
 
 const hideRDiceExplosionElement = function () {
   rDiceExplosionElement.style.display = 'none'
 }
 
+const showSDiceExplosionElement = function () {
+  sDiceExplosionElement.style.display = 'block'
+}
+
+const hideSDiceExplosionElement = function () {
+  sDiceExplosionElement.style.display = 'none'
+}
+
 module.exports = {
   showDiceSuccess,
   reRollImages,
-  hideRDiceExplosionElement
+  hideRDiceExplosionElement,
+  hideSDiceExplosionElement,
+  showRingExplosion,
+  checkExplosion
 }

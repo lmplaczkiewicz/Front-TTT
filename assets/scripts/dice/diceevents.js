@@ -13,7 +13,7 @@ const dice = [
   }
 ]
 
-let reRollDice = []
+// let reRollDice = []
 
 const roll = function (sides) {
   console.log(sides)
@@ -22,7 +22,7 @@ const roll = function (sides) {
 }
 
 const rollDice = function () {
-  reRollDice = []
+  // reRollDice = []
   console.log('Test')
   ui.hideRDiceExplosionElement()
   const ringDiceResults = []
@@ -47,6 +47,27 @@ const rollDice = function () {
   $('.keepDice').on('click', determineClick)
 }
 
+const explodeRingRoll = function () {
+  // reRollDice = []
+  console.log('explode ring test')
+  ui.hideRDiceExplosionElement()
+  const ringDiceResults = []
+  for (let i = 0; i < dice.length; i++) {
+    if (dice[i].name === 'Ring') {
+      console.log(dice[i].name)
+      console.log(dice[i].sides)
+      for (let x = 0; x < document.getElementById('ringDiceExplosionInput').value; x++) {
+        console.log(document.getElementById('ringDiceExplosionInput').value)
+        ringDiceResults.push(roll(dice[i].sides))
+      }
+    }
+  }
+  console.log(ringDiceResults)
+  ui.showRingExplosion(ringDiceResults)
+  $('.keepDice').off('click', determineClick)
+  $('.keepDice').on('click', determineClick)
+}
+
 const getDiceInputs = function () {
   ui.ringDiceNumberToRoll = 0
   ui.skillDiceNumberToRoll = 0
@@ -57,6 +78,11 @@ const getDiceInputs = function () {
 const getRDiceExplosionInput = function () {
   ui.ringDiceNumberToRoll = 0
   ui.ringDiceNumberToRoll = document.getElementById('ringDiceExplosionInput').value
+}
+
+const getSDiceExplosionInput = function () {
+  ui.skillDiceNumberToRoll = 0
+  ui.skillDiceNumberToRoll = document.getElementById('skillDiceExplosionInput').value
 }
 
 const clearDice = function () {
@@ -130,6 +156,7 @@ const determineClick = function (event) {
     //   dice.classList.add('reroll')
     // }
     // $('#reRollDice').show()
+    ui.checkExplosion()
   } else {
     keepDice(event)
   }
@@ -145,11 +172,16 @@ const addHandlers = function () {
   // $('.reRollDice').on('click', reroll)
   $('.clearRDiceInputButton').on('click', clearRDiceInput)
   $('.clearSDiceInputButton').on('click', clearSDiceInput)
-  // $('#ringDiceExplosion').on('click', function () {
-  //  ui.hideRDiceExplosionElement()
-  //  getRDiceExplosionInput()
-  //  rollDice()
-  // })
+  $('#ringDiceExplosion').on('click', function () {
+    // ui.hideRDiceExplosionElement()
+    // getRDiceExplosionInput()
+    explodeRingRoll()
+  })
+  $('#skillDiceExplosion').on('click', function () {
+    ui.hideSDiceExplosionElement()
+    getSDiceExplosionInput()
+    rollDice()
+  })
 }
 
 module.exports = {
