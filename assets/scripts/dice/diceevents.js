@@ -24,7 +24,7 @@ const roll = function (sides) {
 const rollDice = function () {
   reRollDice = []
   console.log('Test')
-  ui.hideRDiceExplosionElement()
+  // ui.hideRDiceExplosionElement()
   const ringDiceResults = []
   const skillDiceResults = []
   for (let i = 0; i < dice.length; i++) {
@@ -57,6 +57,11 @@ const getDiceInputs = function () {
 const getRDiceExplosionInput = function () {
   ui.ringDiceNumberToRoll = 0
   ui.ringDiceNumberToRoll = document.getElementById('ringDiceExplosionInput').value
+}
+
+const getSDiceExplosionInput = function () {
+  ui.skillDiceNumberToRoll = 0
+  ui.skillDiceNumberToRoll = document.getElementById('skillDiceExplosionInput').value
 }
 
 const clearDice = function () {
@@ -145,11 +150,20 @@ const addHandlers = function () {
   // $('.reRollDice').on('click', reroll)
   $('.clearRDiceInputButton').on('click', clearRDiceInput)
   $('.clearSDiceInputButton').on('click', clearSDiceInput)
-  // $('#ringDiceExplosion').on('click', function () {
-  //  ui.hideRDiceExplosionElement()
-  //  getRDiceExplosionInput()
-  //  rollDice()
-  // })
+  $('#ringDiceExplosion').on('click', function () {
+    ui.ringDiceNumberToRoll = 0
+    ui.skillDiceNumberToRoll = 0
+    ui.hideRDiceExplosionElement()
+    getRDiceExplosionInput()
+    rollDice()
+  })
+  $('#skillDiceExplosion').on('click', function () {
+    ui.ringDiceNumberToRoll = 0
+    ui.skillDiceNumberToRoll = 0
+    ui.hideSDiceExplosionElement()
+    getSDiceExplosionInput()
+    rollDice()
+  })
 }
 
 module.exports = {

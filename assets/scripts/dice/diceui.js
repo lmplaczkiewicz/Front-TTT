@@ -8,7 +8,8 @@ let ringDiceTiles = []
 let skillDiceTiles = []
 let ringDiceExplosionCount = 0
 let skillDiceExplosionCount = 0
-let rDiceExplosionElement = document.getElementById('ringDiceExplosion')
+const rDiceExplosionElement = document.getElementById('ringDiceExplosionWrapper')
+const sDiceExplosionElement = document.getElementById('skillDiceExplosionWrapper')
 
 const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   ringDiceTiles = []
@@ -55,18 +56,26 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   console.log(skillDiceTiles)
   const time = moment().format('LTS')
   const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})
+  console.log('ringDiceTiles.length ' + ringDiceTiles.length)
   if (ringDiceTiles.length > 0) {
     $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
     $('#diceTime').text(time)
     if (ringDiceExplosionCount > 0) {
       console.log('explosion rdice exist')
       showRDiceExplosionElement()
+      ringDiceExplosionCount = 0
     }
   }
   const showSkillDiceHtml = showSkillDiceTemplate({dice: skillDiceTiles})
+  console.log('skillDiceTiles.length ' + skillDiceTiles.length)
   if (skillDiceTiles.length > 0) {
     $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
     $('#diceTimeSkill').text(time)
+    if (skillDiceExplosionCount > 0) {
+      console.log('explosion sdice exist')
+      showSDiceExplosionElement()
+      skillDiceExplosionCount = 0
+    }
   }
 }
 
@@ -106,19 +115,38 @@ const reRollImages = function (number, diceType) {
       source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacks.png'
     }
   }
+  if (ringDiceExplosionCount > 0) {
+    console.log('explosion rdice exist')
+    showRDiceExplosionElement()
+    ringDiceExplosionCount = 0
+  }
+  if (skillDiceExplosionCount > 0) {
+    console.log('explosion sdice exist')
+    showSDiceExplosionElement()
+    skillDiceExplosionCount = 0
+  }
   return source
 }
 
 const showRDiceExplosionElement = function () {
-  // rDiceExplosionElement.style.display = 'block'
+  rDiceExplosionElement.style.display = 'block'
 }
 
 const hideRDiceExplosionElement = function () {
   rDiceExplosionElement.style.display = 'none'
 }
 
+const showSDiceExplosionElement = function () {
+  sDiceExplosionElement.style.display = 'block'
+}
+
+const hideSDiceExplosionElement = function () {
+  sDiceExplosionElement.style.display = 'none'
+}
+
 module.exports = {
   showDiceSuccess,
   reRollImages,
-  hideRDiceExplosionElement
+  hideRDiceExplosionElement,
+  hideSDiceExplosionElement
 }
