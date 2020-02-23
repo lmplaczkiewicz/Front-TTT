@@ -67,6 +67,7 @@ const getSDiceExplosionInput = function () {
 const clearDice = function () {
   console.log('clear hit')
   ui.hideRDiceExplosionElement()
+  ui.hideSDiceExplosionElement()
   ui.ringDiceTiles = []
   ui.skillDiceTiles = []
   const ringDiceDisplay = document.getElementById('ringDiceTileDisplay')
@@ -143,6 +144,8 @@ const determineClick = function (event) {
 const addHandlers = function () {
   $('#reRollDice').hide()
   $('.rollDice').on('click', function () {
+    ui.hideRDiceExplosionElement()
+    ui.hideSDiceExplosionElement()
     getDiceInputs()
     rollDice()
   })
