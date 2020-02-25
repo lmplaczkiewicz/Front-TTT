@@ -58,10 +58,12 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})
   console.log('ringDiceTiles.length ' + ringDiceTiles.length)
   if (ringDiceTiles.length > 0) {
+    $('.currentRing').removeClass('currentRing')
     $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
     $('#diceTime').text(time)
     if (ringDiceExplosionCount > 0) {
       console.log('explosion rdice exist')
+      document.getElementById('ringDiceExplosionInput').value = ringDiceExplosionCount
       showRDiceExplosionElement()
       ringDiceExplosionCount = 0
     }
@@ -69,10 +71,12 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
   const showSkillDiceHtml = showSkillDiceTemplate({dice: skillDiceTiles})
   console.log('skillDiceTiles.length ' + skillDiceTiles.length)
   if (skillDiceTiles.length > 0) {
+    $('.currentSkill').removeClass('currentSKill')
     $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
     $('#diceTimeSkill').text(time)
     if (skillDiceExplosionCount > 0) {
       console.log('explosion sdice exist')
+      document.getElementById('skillDiceExplosionInput').value = skillDiceExplosionCount
       showSDiceExplosionElement()
       skillDiceExplosionCount = 0
     }
