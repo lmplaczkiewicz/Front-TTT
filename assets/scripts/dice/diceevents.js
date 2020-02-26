@@ -15,22 +15,20 @@ const dice = [
 
 let reRollDice = []
 
+let explodeKeepsBoolean = false
+
 const roll = function (sides) {
-  console.log(sides)
   const randomNumber = Math.floor(Math.random() * sides) + 1
   return randomNumber
 }
 
-const rollDice = function () {
+const rollDice = function (explodeKeepsBoolean) {
   reRollDice = []
-  console.log('Test')
   // ui.hideRDiceExplosionElement()
   const ringDiceResults = []
   const skillDiceResults = []
   for (let i = 0; i < dice.length; i++) {
     if (dice[i].name === 'Ring') {
-      console.log(dice[i].name)
-      console.log(dice[i].sides)
       for (let x = 0; x < ui.ringDiceNumberToRoll; x++) {
         ringDiceResults.push(roll(dice[i].sides))
       }
@@ -40,9 +38,7 @@ const rollDice = function () {
       }
     }
   }
-  console.log(ringDiceResults)
-  console.log(skillDiceResults)
-  ui.showDiceSuccess(ringDiceResults, skillDiceResults)
+  ui.showDiceSuccess(ringDiceResults, skillDiceResults, explodeKeepsBoolean)
   $('.keepDice').off('click', determineClick)
   $('.keepDice').on('click', determineClick)
 }
@@ -65,7 +61,6 @@ const getSDiceExplosionInput = function () {
 }
 
 const clearDice = function () {
-  console.log('clear hit')
   ui.hideRDiceExplosionElement()
   ui.hideSDiceExplosionElement()
   ui.ringDiceTiles = []
@@ -116,8 +111,6 @@ const determineClick = function (event) {
   if (event.shiftKey) {
     event.preventDefault()
     const selectedDice = event.target
-    console.log(selectedDice)
-    console.log(JSON.stringify(selectedDice.src))
     const urlText = JSON.stringify(selectedDice.src)
     selectedDice.classList.add('reroll')
     if (urlText.includes('white')) {
@@ -141,14 +134,23 @@ const determineClick = function (event) {
   }
 }
 
+const determineExplodeKeeps = function (event) {
+  if (event.target.checked === true) {
+    explodeKeepsBoolean = true
+  } else {
+    explodeKeepsBoolean = false
+  }
+}
+
 const addHandlers = function () {
   $('#reRollDice').hide()
   $('.rollDice').on('click', function () {
     ui.hideRDiceExplosionElement()
     ui.hideSDiceExplosionElement()
     getDiceInputs()
-    rollDice()
+    rollDice(explodeKeepsBoolean)
   })
+  $('#explodeKeeps').on('click', determineExplodeKeeps)
   $('.clearDice').on('click', clearDice)
   // $('.reRollDice').on('click', reroll)
   $('.clearRDiceInputButton').on('click', clearRDiceInput)
@@ -158,7 +160,7 @@ const addHandlers = function () {
     ui.skillDiceNumberToRoll = 0
     ui.hideRDiceExplosionElement()
     getRDiceExplosionInput()
-    rollDice()
+    rollDice(explodeKeepsBoolean)
     $('#diceTime').text('Explosion')
   })
   $('#skillDiceExplosion').on('click', function () {
@@ -166,8 +168,22 @@ const addHandlers = function () {
     ui.skillDiceNumberToRoll = 0
     ui.hideSDiceExplosionElement()
     getSDiceExplosionInput()
-    rollDice()
+    rollDice(explodeKeepsBoolean)
     $('#diceTimeSkill').text('Explosion')
+  })
+  $('.minus').click(function () {
+    const $input = $(this).parent().find('input')
+    let count = parseInt($input.val()) - 1
+    count = count < 0 ? 0 : count
+    $input.val(count)
+    $input.change()
+    return false
+  })
+  $('.plus').click(function () {
+    const $input = $(this).parent().find('input')
+    $input.val(parseInt($input.val()) + 1)
+    $input.change()
+    return false
   })
 }
 

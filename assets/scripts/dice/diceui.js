@@ -11,13 +11,12 @@ let skillDiceExplosionCount = 0
 const rDiceExplosionElement = document.getElementById('ringDiceExplosionWrapper')
 const sDiceExplosionElement = document.getElementById('skillDiceExplosionWrapper')
 
-const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
+const showDiceSuccess = function (ringDiceResults, skillDiceResults, explodeKeepsBoolean) {
   ringDiceTiles = []
   skillDiceTiles = []
   let ringDiceExplosionCount = 0
   let skillDiceExplosionCount = 0
   for (let i = 0; i < ringDiceResults.length; i++) {
-    console.log('In ring dice')
     if (ringDiceResults[i] === 1) {
       ringDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/black.png')
     } else if (ringDiceResults[i] === 2) {
@@ -33,7 +32,6 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
       ringDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacks.png')
     }
   }
-  console.log(ringDiceTiles)
   for (let i = 0; i < skillDiceResults.length; i++) {
     if (skillDiceResults[i] === 1 || skillDiceResults[i] === 2) {
       skillDiceTiles.push('https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/white.png')
@@ -53,29 +51,26 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults) {
       skillDiceExplosionCount++
     }
   }
-  console.log(skillDiceTiles)
   const time = moment().format('LTS')
   const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})
-  console.log('ringDiceTiles.length ' + ringDiceTiles.length)
   if (ringDiceTiles.length > 0) {
     $('.currentRing').removeClass('currentRing')
     $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
     $('#diceTime').text(time)
-    if (ringDiceExplosionCount > 0) {
-      console.log('explosion rdice exist')
+    console.log(explodeKeepsBoolean)
+    if (ringDiceExplosionCount > 0 && explodeKeepsBoolean === false) {
       document.getElementById('ringDiceExplosionInput').value = ringDiceExplosionCount
       showRDiceExplosionElement()
       ringDiceExplosionCount = 0
     }
   }
   const showSkillDiceHtml = showSkillDiceTemplate({dice: skillDiceTiles})
-  console.log('skillDiceTiles.length ' + skillDiceTiles.length)
   if (skillDiceTiles.length > 0) {
     $('.currentSkill').removeClass('currentSKill')
     $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
     $('#diceTimeSkill').text(time)
-    if (skillDiceExplosionCount > 0) {
-      console.log('explosion sdice exist')
+    console.log(explodeKeepsBoolean)
+    if (skillDiceExplosionCount > 0 && explodeKeepsBoolean === false) {
       document.getElementById('skillDiceExplosionInput').value = skillDiceExplosionCount
       showSDiceExplosionElement()
       skillDiceExplosionCount = 0
@@ -120,12 +115,10 @@ const reRollImages = function (number, diceType) {
     }
   }
   if (ringDiceExplosionCount > 0) {
-    console.log('explosion rdice exist')
     showRDiceExplosionElement()
     ringDiceExplosionCount = 0
   }
   if (skillDiceExplosionCount > 0) {
-    console.log('explosion sdice exist')
     showSDiceExplosionElement()
     skillDiceExplosionCount = 0
   }

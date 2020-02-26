@@ -60,3 +60,26 @@ body {
 .explosion {
   display: none;
 }
+
+span {cursor:pointer; }
+		.number{
+		}
+		.minus, .plus{
+			width:20px;
+			background:#f2f2f2;
+			border-radius:4px;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+		}
+
+.strife{
+			height: 28px;
+      width: 35px;
+      text-align: center;
+      font-size: 26px;
+			border:1px solid #ddd;
+			border-radius:4px;
+      display: inline-block;
+      vertical-align: middle;
+    }
