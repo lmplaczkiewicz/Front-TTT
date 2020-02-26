@@ -10,6 +10,8 @@ let ringDiceExplosionCount = 0
 let skillDiceExplosionCount = 0
 const rDiceExplosionElement = document.getElementById('ringDiceExplosionWrapper')
 const sDiceExplosionElement = document.getElementById('skillDiceExplosionWrapper')
+const rkDiceExplosionElement = document.getElementById('ringDiceKeepExplosionWrapper')
+const skDiceExplosionElement = document.getElementById('skillDiceKeepExplosionWrapper')
 
 const showDiceSuccess = function (ringDiceResults, skillDiceResults, explodeKeepsBoolean) {
   ringDiceTiles = []
@@ -142,9 +144,29 @@ const hideSDiceExplosionElement = function () {
   sDiceExplosionElement.style.display = 'none'
 }
 
+const showKeepRDiceExplosionElement = function () {
+  rkDiceExplosionElement.style.display = 'block'
+}
+
+const hideKeepRDiceExplosionElement = function () {
+  rkDiceExplosionElement.style.display = 'none'
+}
+
+const showKeepSDiceExplosionElement = function () {
+  skDiceExplosionElement.style.display = 'block'
+}
+
+const hideKeepSDiceExplosionElement = function () {
+  skDiceExplosionElement.style.display = 'none'
+}
+
 module.exports = {
   showDiceSuccess,
   reRollImages,
   hideRDiceExplosionElement,
-  hideSDiceExplosionElement
+  hideSDiceExplosionElement,
+  showKeepRDiceExplosionElement,
+  hideKeepRDiceExplosionElement,
+  showKeepSDiceExplosionElement,
+  hideKeepSDiceExplosionElement
 }

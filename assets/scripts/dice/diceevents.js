@@ -104,6 +104,9 @@ const checkCurrentStacks = function () {
   }
   const count = (images.match(/blacket/g) || []).length
   console.log(count)
+  if (count > 0) {
+    ui.showKeepRDiceExplosionElement()
+  }
 }
 
 const keepDice = function (event) {
