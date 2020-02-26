@@ -54,7 +54,8 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults, explodeKeep
   const time = moment().format('LTS')
   const showRingDiceHtml = showDiceTemplate({dice: ringDiceTiles})
   if (ringDiceTiles.length > 0) {
-    $('.currentRing').removeClass('currentRing')
+    $('#currentRing').removeAttr('id')
+    // $('.currentRing').removeClass('currentRing')
     $('#ringDiceTileDisplay').prepend(showRingDiceHtml)
     $('#diceTime').text(time)
     console.log(explodeKeepsBoolean)

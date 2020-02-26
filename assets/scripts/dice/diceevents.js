@@ -94,6 +94,18 @@ const clearSDiceInput = function () {
 //   }
 // }
 
+const checkCurrentStacks = function () {
+  console.log($('#currentRing').html())
+  console.log(document.getElementById('currentRing').querySelectorAll('.kept'))
+  const temp = document.getElementById('currentRing').querySelectorAll('.kept')
+  let images
+  for (let i = 0; i < temp.length; i++) {
+    images += temp[i].src
+  }
+  const count = (images.match(/blacket/g) || []).length
+  console.log(count)
+}
+
 const keepDice = function (event) {
   event.preventDefault()
   const dice = event.target
@@ -104,6 +116,9 @@ const keepDice = function (event) {
     dice.classList.remove('kept')
   } else {
     dice.classList.add('kept')
+  }
+  if (explodeKeepsBoolean === true) {
+    checkCurrentStacks()
   }
 }
 
