@@ -159,6 +159,7 @@ const addHandlers = function () {
     ui.hideRDiceExplosionElement()
     getRDiceExplosionInput()
     rollDice()
+    $('#diceTime').text('Explosion')
   })
   $('#skillDiceExplosion').on('click', function () {
     ui.ringDiceNumberToRoll = 0
@@ -166,6 +167,7 @@ const addHandlers = function () {
     ui.hideSDiceExplosionElement()
     getSDiceExplosionInput()
     rollDice()
+    $('#diceTimeSkill').text('Explosion')
   })
 }
 
