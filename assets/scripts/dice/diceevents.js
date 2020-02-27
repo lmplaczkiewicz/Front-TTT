@@ -15,6 +15,9 @@ const dice = [
 
 let reRollDice = []
 
+let ringCount = 0
+let skillCount = 0
+
 let explodeKeepsBoolean = false
 
 const roll = function (sides) {
@@ -51,13 +54,21 @@ const getDiceInputs = function () {
 }
 
 const getRDiceExplosionInput = function () {
-  ui.ringDiceNumberToRoll = 0
-  ui.ringDiceNumberToRoll = document.getElementById('ringDiceExplosionInput').value
+  if (ringCount !== 0) {
+    ui.ringDiceNumberToRoll = ringCount
+  } else {
+    ui.ringDiceNumberToRoll = 0
+    ui.ringDiceNumberToRoll = document.getElementById('ringDiceExplosionInput').value
+  }
 }
 
 const getSDiceExplosionInput = function () {
-  ui.skillDiceNumberToRoll = 0
-  ui.skillDiceNumberToRoll = document.getElementById('skillDiceExplosionInput').value
+  if (skillCount !== 0) {
+    ui.skillDiceNumberToRoll = skillCount
+  } else {
+    ui.skillDiceNumberToRoll = 0
+    ui.skillDiceNumberToRoll = document.getElementById('skillDiceExplosionInput').value
+  }
 }
 
 const clearDice = function () {
@@ -95,31 +106,48 @@ const clearSDiceInput = function () {
 // }
 
 const checkCurrentStacks = function () {
-  console.log($('#currentRing').html())
-  console.log(document.getElementById('currentRing').querySelectorAll('.kept'))
-  const temp = document.getElementById('currentRing').querySelectorAll('.kept')
-  let images
-  for (let i = 0; i < temp.length; i++) {
-    images += temp[i].src
+  if (document.getElementById('currentRing') !== null) {
+    const ringTemp = document.getElementById('currentRing').querySelectorAll('.kept')
+    let images
+    for (let i = 0; i < ringTemp.length; i++) {
+      images += ringTemp[i].src
+    }
+    if (images !== undefined) {
+      ringCount = (images.match(/blacket.png/g) || []).length
+      console.log(ringCount)
+      if (ringCount > 0) {
+        ui.showKeepRDiceExplosionElement()
+      }
+    }
   }
-  const count = (images.match(/blacket/g) || []).length
-  console.log(count)
-  if (count > 0) {
-    ui.showKeepRDiceExplosionElement()
+  console.log("document.getElementById('currentSkill'): " + document.getElementById('currentSkill'))
+  if (document.getElementById('currentSkill') !== null) {
+    const skillTemp = document.getElementById('currentSkill').querySelectorAll('.kept')
+    let images2
+    for (let i = 0; i < skillTemp.length; i++) {
+      images2 += skillTemp[i].src
+    }
+    if (images2 !== undefined) {
+      skillCount = (images2.match(/whitee.png/g) || []).length
+      skillCount += (images2.match(/whiteet.png/g) || []).length
+      console.log('skillCount: ' + skillCount)
+      if (skillCount > 0) {
+        ui.showKeepSDiceExplosionElement()
+      }
+    }
   }
 }
 
 const keepDice = function (event) {
   event.preventDefault()
   const dice = event.target
-  console.log('dice is ' + dice)
-  console.log(dice.classList)
   if (dice.classList.contains('kept')) {
     console.log('in kept present condition')
     dice.classList.remove('kept')
   } else {
     dice.classList.add('kept')
   }
+  console.log('explodeKeepsBoolean: ' + explodeKeepsBoolean)
   if (explodeKeepsBoolean === true) {
     checkCurrentStacks()
   }
@@ -133,10 +161,10 @@ const determineClick = function (event) {
     selectedDice.classList.add('reroll')
     if (urlText.includes('white')) {
       const reRollResult = roll(12)
-      event.target.src = ui.reRollImages(reRollResult, 'Skill')
+      event.target.src = ui.reRollImages(reRollResult, 'Skill', explodeKeepsBoolean)
     } else {
       const reRollResult = roll(6)
-      event.target.src = ui.reRollImages(reRollResult, 'Ring')
+      event.target.src = ui.reRollImages(reRollResult, 'Ring', explodeKeepsBoolean)
     }
     // if (dice.classList.contains('reroll')) {
     //   console.log('in reroll present condition')
@@ -160,6 +188,42 @@ const determineExplodeKeeps = function (event) {
   }
 }
 
+const ringExplosionSteps = function (event) {
+  ui.ringDiceNumberToRoll = 0
+  ui.skillDiceNumberToRoll = 0
+  ui.hideRDiceExplosionElement()
+  getRDiceExplosionInput()
+  rollDice(explodeKeepsBoolean)
+  $('#diceTime').text('Explosion')
+}
+
+const skillExplosionSteps = function (event) {
+  ui.ringDiceNumberToRoll = 0
+  ui.skillDiceNumberToRoll = 0
+  ui.hideSDiceExplosionElement()
+  getSDiceExplosionInput()
+  rollDice(explodeKeepsBoolean)
+  $('#diceTimeSkill').text('Explosion')
+}
+
+const keptRingExplosionSteps = function () {
+  ui.ringDiceNumberToRoll = 0
+  ui.skillDiceNumberToRoll = 0
+  ui.hideKeepRDiceExplosionElement()
+  getRDiceExplosionInput()
+  rollDice(explodeKeepsBoolean)
+  $('#diceTime').text('Explosion')
+}
+
+const keptSkillExplosionSteps = function () {
+  ui.ringDiceNumberToRoll = 0
+  ui.skillDiceNumberToRoll = 0
+  ui.hideKeepSDiceExplosionElement()
+  getSDiceExplosionInput()
+  rollDice(explodeKeepsBoolean)
+  $('#diceTimeSkill').text('Explosion')
+}
+
 const addHandlers = function () {
   $('#reRollDice').hide()
   $('.rollDice').on('click', function () {
@@ -173,22 +237,10 @@ const addHandlers = function () {
   // $('.reRollDice').on('click', reroll)
   $('.clearRDiceInputButton').on('click', clearRDiceInput)
   $('.clearSDiceInputButton').on('click', clearSDiceInput)
-  $('#ringDiceExplosion').on('click', function () {
-    ui.ringDiceNumberToRoll = 0
-    ui.skillDiceNumberToRoll = 0
-    ui.hideRDiceExplosionElement()
-    getRDiceExplosionInput()
-    rollDice(explodeKeepsBoolean)
-    $('#diceTime').text('Explosion')
-  })
-  $('#skillDiceExplosion').on('click', function () {
-    ui.ringDiceNumberToRoll = 0
-    ui.skillDiceNumberToRoll = 0
-    ui.hideSDiceExplosionElement()
-    getSDiceExplosionInput()
-    rollDice(explodeKeepsBoolean)
-    $('#diceTimeSkill').text('Explosion')
-  })
+  $('#ringDiceExplosion').on('click', ringExplosionSteps)
+  $('#skillDiceExplosion').on('click', skillExplosionSteps)
+  $('#ringDiceKeepExplosion').on('click', keptRingExplosionSteps)
+  $('#skillDiceKeepExplosion').on('click', keptSkillExplosionSteps)
   $('.minus').click(function () {
     const $input = $(this).parent().find('input')
     let count = parseInt($input.val()) - 1

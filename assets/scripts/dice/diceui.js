@@ -69,7 +69,7 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults, explodeKeep
   }
   const showSkillDiceHtml = showSkillDiceTemplate({dice: skillDiceTiles})
   if (skillDiceTiles.length > 0) {
-    $('.currentSkill').removeClass('currentSKill')
+    $('.currentSkill').removeAttr('id')
     $('#skillDiceTileDisplay').prepend(showSkillDiceHtml)
     $('#diceTimeSkill').text(time)
     console.log(explodeKeepsBoolean)
@@ -81,7 +81,7 @@ const showDiceSuccess = function (ringDiceResults, skillDiceResults, explodeKeep
   }
 }
 
-const reRollImages = function (number, diceType) {
+const reRollImages = function (number, diceType, explodeKeepsBoolean) {
   let source
   if (diceType === 'Skill') {
     if (number === 1 || number === 2) {
@@ -117,11 +117,11 @@ const reRollImages = function (number, diceType) {
       source = 'https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/blacks.png'
     }
   }
-  if (ringDiceExplosionCount > 0) {
+  if (ringDiceExplosionCount > 0 && explodeKeepsBoolean === false) {
     showRDiceExplosionElement()
     ringDiceExplosionCount = 0
   }
-  if (skillDiceExplosionCount > 0) {
+  if (skillDiceExplosionCount > 0 && explodeKeepsBoolean === false) {
     showSDiceExplosionElement()
     skillDiceExplosionCount = 0
   }
