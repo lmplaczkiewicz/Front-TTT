@@ -118,6 +118,8 @@ const checkCurrentStacks = function () {
       if (ringCount > 0) {
         ui.showKeepRDiceExplosionElement()
       }
+    } else {
+      ui.hideKeepRDiceExplosionElement()
     }
   }
   console.log("document.getElementById('currentSkill'): " + document.getElementById('currentSkill'))
@@ -133,6 +135,8 @@ const checkCurrentStacks = function () {
       console.log('skillCount: ' + skillCount)
       if (skillCount > 0) {
         ui.showKeepSDiceExplosionElement()
+      } else {
+        ui.hideKeepSDiceExplosionElement()
       }
     }
   }
@@ -162,9 +166,13 @@ const determineClick = function (event) {
     if (urlText.includes('white')) {
       const reRollResult = roll(12)
       event.target.src = ui.reRollImages(reRollResult, 'Skill', explodeKeepsBoolean)
+      ui.hideKeepSDiceExplosionElement()
+      checkCurrentStacks()
     } else {
       const reRollResult = roll(6)
       event.target.src = ui.reRollImages(reRollResult, 'Ring', explodeKeepsBoolean)
+      checkCurrentStacks()
+      ui.hideKeepRDiceExplosionElement()
     }
     // if (dice.classList.contains('reroll')) {
     //   console.log('in reroll present condition')
