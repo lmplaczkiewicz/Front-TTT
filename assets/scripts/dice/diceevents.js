@@ -16,7 +16,11 @@ const dice = [
 let reRollDice = []
 
 let ringCount = 0
+let ringSCount = 0
+let ringStCount = 0
 let skillCount = 0
+let skillSCount = 0
+let skillStCount = 0
 
 let explodeKeepsBoolean = false
 

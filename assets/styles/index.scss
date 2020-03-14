@@ -2,7 +2,7 @@
 
 body {
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 .diceImage {
@@ -34,6 +34,16 @@ body {
   background: #808080;
   border-radius: 25px;
   height: 400px;
+  width: 33%;
+  margin: 25px;
+  overflow: auto;
+  text-align: center;
+}
+
+.stanceBox {
+  background: #808080;
+  border-radius: 25px;
+  height: 25px;
   width: 33%;
   margin: 25px;
   overflow: auto;
