@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Templar's Treasure Trove</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+      <link href='https://fonts.googleapis.com/css?family=Eagle Lake' rel='stylesheet'>
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <img src='https://raw.githubusercontent.com/lmplaczkiewicz/Front-TTT/master/assets/images/paper.png' class='openingImage' alt="">
+      <h1 class="pageFont text-center mt-sm-4">Legend of The Five Rings Dice</h1>
+      <h5 class="pageFont text-center mt-sm-4">Click to keep and shift click to re-roll</h5>
+        <div class="row">
+          <div class="col sectionBox" id='rollBox'>
+            <div class="mt-sm-2 mb-sm-4">
+              <h3 class="pageFont">Ring Dice</h3>
+              <div class="row justify-content-xl-center">
+              <select class="col-xl-2" name="rDice" id='rDice'>
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+              <!-- <input type="number" maxlength="1" max="6" name="rDice" id='rDice' /> -->
+              <button class="clearRDiceInputButton btn-xs">x</button>
+              </div>
+            </div>
+            <h3 class="pageFont">Skill Dice</h3>
+            <div class="row justify-content-xl-center">
+            <select class="col-xl-2" name="sDice" id='sDice'>
+              <option></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </select>
+            <!-- <input type="number" maxlength="1" max="6" name="sDice" id='sDice' /> -->
+            <button class="clearSDiceInputButton btn-xs">x</button>
+            </div>
+            <div>
+              <button class="rollDice btn btn-success mt-sm-4 mr-sm-3" id='rollDice'>Roll Dice</button>
+              <button class="clearDice btn btn-warning mt-sm-4" id='clearDice'>Clear Dice</button>
+            </div>
+            <br>
+            <h5 class="pageFont">Strife Counter</h5>
+            <div class="number">
+            	<span class="minus">-</span>
+            	<input class='strife' type="text" value="0"/>
+            	<span class="plus">+</span>
+            </div>
+            <br>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="explodeKeeps">
+              <label class="custom-control-label pageFont" for="explodeKeeps">Use Explode Keeps Button (Experimental)</label>
+            </div>
+              <!-- <button class="reRollDice btn btn-warning mt-sm-4" id='reRollDice'>Re-Roll Selected Dice</button> -->
+          </div>
+          <div class="col sectionBox" id='ringBox'>
+            <div class="mt-sm-2 mb-sm-4 explosion row justify-content-xl-center" id='ringDiceExplosionWrapper'>
+              <select class="col-xl-2" id='ringDiceExplosionInput'>
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+              <!-- <input type="number" maxlength="1" max="6" id='ringDiceExplosionInput'/> -->
+              <button class="ringDiceExplosionButton btn-danger btn-xs" id="ringDiceExplosion">Explode!</button>
+            </div>
+          <div class="mt-sm-2 mb-sm-4 explosion row justify-content-xl-center" id='ringDiceKeepExplosionWrapper'>
+            <button class="ringDiceExplosionButton btn-danger btn-xs" id="ringDiceKeepExplosion">Explode Kept Dice!</button>
+          </div>
+            <div id='ringDiceTileDisplay'></div>
+          </div>
+          <div class="col sectionBox" id='skillBox'>
+            <div class="mt-sm-2 mb-sm-4 explosion row justify-content-xl-center" id='skillDiceExplosionWrapper'>
+              <select class="col-xl-2" id='skillDiceExplosionInput'>
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+              <!-- <input type="number" maxlength="1" max="6" id='skillDiceExplosionInput'/> -->
+              <button class="skillDiceExplosionButton btn-danger btn-xs" id="skillDiceExplosion">Explode!</button>
+            </div>
+            <div class="mt-sm-2 mb-sm-4 explosion row justify-content-xl-center" id='skillDiceKeepExplosionWrapper'>
+              <button class="skillDiceExplosionButton btn-danger btn-xs" id="skillDiceKeepExplosion">Explode Kept Dice!</button>
+            </div>
+            <div id='skillDiceTileDisplay'></div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col stanceBox">
+              <h4 class='pageFont stance' id='earth'>Earth</h4>
+            </div>
+            <div class="col stanceBox">
+              <h4 class='pageFont stance' id='air'>Air</h4>
+            </div>
+            <div class="col stanceBox">
+              <h4 class='pageFont stance' id='water'>Water</h4>
+            </div>
+            <div class="col stanceBox">
+              <h4 class='pageFont stance' id='fire'>Fire</h4>
+            </div>
+            <div class="col stanceBox">
+              <h4 class='pageFont stance' id='void'>Void</h4>
+            </div>
+          </div>
+        </div>
+        <div class="opps" id='stanceOppDisplay'></div>
+    </body>
+</html>
