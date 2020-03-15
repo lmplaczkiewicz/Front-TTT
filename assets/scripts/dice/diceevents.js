@@ -1,5 +1,10 @@
 // const getFormFields = require('../../../lib/get-form-fields')
 const ui = require('./diceui')
+const earthTemplate = require('../templates/earthStanceDisplay.handlebars')
+const airTemplate = require('../templates/airStanceDisplay.handlebars')
+const fireTemplate = require('../templates/fireStanceDisplay.handlebars')
+const voidTemplate = require('../templates/voidStanceDisplay.handlebars')
+const waterTemplate = require('../templates/waterStanceDisplay.handlebars')
 // const store = require('../store')
 
 const dice = [
@@ -236,6 +241,27 @@ const keptSkillExplosionSteps = function () {
   $('#diceTimeSkill').text('Explosion')
 }
 
+const changeStance = function () {
+  $('.stance').removeClass('activeStance')
+  $(event.target).addClass('activeStance')
+  if (event.target.id === 'earth') {
+    $('#stanceOppDisplay').empty()
+    $('#stanceOppDisplay').prepend(earthTemplate)
+  } else if (event.target.id === 'air') {
+    $('#stanceOppDisplay').empty()
+    $('#stanceOppDisplay').prepend(airTemplate)
+  } else if (event.target.id === 'water') {
+    $('#stanceOppDisplay').empty()
+    $('#stanceOppDisplay').prepend(waterTemplate)
+  } else if (event.target.id === 'fire') {
+    $('#stanceOppDisplay').empty()
+    $('#stanceOppDisplay').prepend(fireTemplate)
+  } else if (event.target.id === 'void') {
+    $('#stanceOppDisplay').empty()
+    $('#stanceOppDisplay').prepend(voidTemplate)
+  }
+}
+
 const addHandlers = function () {
   $('#reRollDice').hide()
   $('.rollDice').on('click', function () {
@@ -267,6 +293,11 @@ const addHandlers = function () {
     $input.change()
     return false
   })
+  $('#earth').on('click', changeStance)
+  $('#fire').on('click', changeStance)
+  $('#air').on('click', changeStance)
+  $('#void').on('click', changeStance)
+  $('#water').on('click', changeStance)
 }
 
 module.exports = {

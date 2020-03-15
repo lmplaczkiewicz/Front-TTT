@@ -12,6 +12,10 @@ body {
   width: 45px;
 }
 
+.activeStance {
+  background-color: red;
+}
+
 .openingImage {
   /* Set rules to fill background */
   min-height: 100%;
@@ -42,11 +46,10 @@ body {
 
 .stanceBox {
   background: #808080;
-  border-radius: 25px;
   height: 25px;
   width: 33%;
+  padding: 0px;
   margin: 25px;
-  overflow: auto;
   text-align: center;
 }
 
@@ -69,6 +72,10 @@ body {
 
 .explosion {
   display: none;
+}
+
+.opps {
+  text-align: center;
 }
 
 span {cursor:pointer; }
